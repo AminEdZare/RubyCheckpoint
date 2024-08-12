@@ -142,8 +142,8 @@ end
 # nursery1 = RhymeRecite.new("Rhyme2.json")
 # puts nursery1.recite
 
-# nursery2 = RhymeRecite.new("Rhyme2.json")
-# puts nursery2.random_recite
+nursery2 = RhymeRecite.new("Rhyme1.json")
+puts nursery2.semi_random_recite
 
 # nursery3 = RhymeRecite.new("Rhyme1.json")
 # puts nursery3.semi_random_recite
