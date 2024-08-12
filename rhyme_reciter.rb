@@ -18,7 +18,7 @@ class RhymeRecite
             #reset final_string each interation
             final_string = ""
 
-            # checks to see if space is needed to append next phrase or if still on first iteration
+            # checks to see if space is needed to append next phrase or if still on first select
             if i == 1
                 string = rhyme_array[i]
             elsif i >= 2
@@ -27,9 +27,9 @@ class RhymeRecite
 
             # checks to see if appending middle content is needed or if still on first iteration
             if string == ""
-                final_string = rhyme_array[0] + " " + rhyme_array[-1] + "\n"
+                final_string = rhyme_array[0].capitalize + " " + rhyme_array[-1] + "." + "\n"
             else
-                final_string = rhyme_array[0] + " " + string + " " + rhyme_array[-1] + "\n"
+                final_string = rhyme_array[0].capitalize + " " + string + " " + rhyme_array[-1] + "." + "\n"
             end
             
             # save line created in array
@@ -38,11 +38,113 @@ class RhymeRecite
         final_array
     end
 
+
+    def random_recite
+        rhyme_array_copy = rhyme_array
+
+        first_phrase = ""
+        last_phrase = ""
+        random_string = ""
+
+        final_random_array = []
+
+        for i in 0...rhyme_array.length-1 do
+
+            final_random_string = ""
+
+            # chooses a first and last phrase for all lines
+            if i == 0
+                
+                # sequence selects a random phrase and deletes it from array of remaining phrases
+                random_phrase = rhyme_array_copy.sample
+                rhyme_array_copy.delete(random_phrase)
+                first_phrase = random_phrase
+                first_phrase = first_phrase.capitalize
+
+                random_phrase = rhyme_array_copy.sample
+                rhyme_array_copy.delete(random_phrase)
+                last_phrase = random_phrase
+            end
+
+            # checks to see if appending of string is needed while generating next random phrase
+            if i == 1
+                random_string = rhyme_array_copy.sample
+                rhyme_array_copy.delete(random_string)
+
+            elsif i >= 2
+                random_phrase = rhyme_array_copy.sample
+                rhyme_array_copy.delete(random_phrase)
+                random_string = random_phrase + " " + random_string
+            end
+
+            # checks to see if appending middle content is needed or if still on first iteration
+            if random_string == ""
+                final_random_string = first_phrase + " " + last_phrase + "." +"\n"
+            else
+                final_random_string = first_phrase + " " + random_string+ " " + last_phrase + "." "\n"
+            end
+            
+            # save line created in array
+            final_random_array.push(final_random_string)
+        end
+        final_random_array
+    end
+
+    def semi_random_recite
+        rhyme_array_copy = rhyme_array
+
+        first_phrase = ""
+        last_phrase = ""
+        random_string = ""
+
+        final_random_array = []
+
+        for i in 0...rhyme_array.length-1 do
+
+            final_random_string = ""
+            
+            if i == 0
+                # defines a predetermined last_phrase, along with a random beginning first_phrase
+                last_phrase = rhyme_array_copy[-1]
+                rhyme_array_copy.delete(last_phrase)
+
+                random_phrase = rhyme_array_copy.sample
+                rhyme_array_copy.delete(random_phrase)
+                first_phrase = random_phrase
+                first_phrase = first_phrase.capitalize
+            end
+
+            # checks to see if appending of string is needed while generating next random phrase
+            if i == 1
+                random_string = rhyme_array_copy.sample
+                rhyme_array_copy.delete(random_string)
+
+            elsif i >= 2
+                random_phrase = rhyme_array_copy.sample
+                rhyme_array_copy.delete(random_phrase)
+                random_string = random_phrase + " " + random_string
+            end
+
+            # checks to see if appending middle content is needed or if still on first iteration
+            if random_string == ""
+                final_random_string = first_phrase + " " + last_phrase + "." +"\n"
+            else
+                final_random_string = first_phrase + " " + random_string+ " " + last_phrase + "." "\n"
+            end
+            
+            # save line created in array
+            final_random_array.push(final_random_string)
+        end
+        final_random_array
+    end
 end
 
-nursery = RhymeRecite.new("Rhyme1.json")
-puts nursery.recite
+# nursery1 = RhymeRecite.new("Rhyme2.json")
+# puts nursery1.recite
 
-nursery = RhymeRecite.new("Rhyme2.json")
-puts nursery.recite
+# nursery2 = RhymeRecite.new("Rhyme2.json")
+# puts nursery2.random_recite
+
+# nursery3 = RhymeRecite.new("Rhyme1.json")
+# puts nursery3.semi_random_recite
 
